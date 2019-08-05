@@ -13,35 +13,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bae.entity.Account;
-import com.bae.service.AccountService;
+import com.bae.service.AccountServiceImpl;
 
 @RestController
 @RequestMapping("/account")
 public class AccountController {
-	
-	@GetMapping
-	public Collection<Account> getAllAccounts(){
-		return AccountService.getAllAccounts();
+
+	@GetMapping("/all")
+	public Collection<Account> getAllAccounts() {
+		return AccountServiceImpl.getAllAccounts();
 	}
-	
-	
+
+	@GetMapping("/anAccount/{id}")
+	public Collection<Account> getanAccount(@PathParam("id") int id) {
+		return AccountServiceImpl.getAnAccount();
+	}
 
 	@DeleteMapping("/delete/{id}")
 	public Collection<Account> deleteAccount(@PathParam("id") int id) {
-			return AccountService.deleteAccount();
-		}
-	
-//	
-//	@PutMapping("/{id}")
-//	public Collection<Account> updateAccount(@PathVariable("id") int id, String accountNumber)
-//	Account.setAccountNumber(id);
-//	return AccountService.updateAccount(account);
-	
-@PostMapping("/create")
-public Collection<Account> createAccount(){
-	return AccountService.createAccount();
-}
+		return AccountServiceImpl.deleteAccount();
+	}
 
-	
-	
+	@PutMapping("updateAccount/{id}")
+	public Collection<Account> updateAccount(@PathVariable("id") int id, String accountNumber) {
+
+		return AccountServiceImpl.updateAccount(id, accountNumber);
+	}
+
+	@PostMapping("/create")
+	public Collection<Account> createAccount() {
+		return AccountServiceImpl.createAccount();
+	}
+
 }
