@@ -1,0 +1,10 @@
+package com.example.demo;
+
+public class MyComponent {
+
+	public String comp() {
+	return "This is a component!";
+
+	}
+
+}
