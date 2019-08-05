@@ -10,6 +10,8 @@ import javax.persistence.Id;
 public class Account {
 
 @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+private int id;
+@Column (length = 30)
 private String accountNumber;
 @Column (length = 50)
 private String firstName;
@@ -25,6 +27,16 @@ public Account(String accountNumber, String firstName, String lastName, int priz
 	this.firstName = firstName;
 	this.lastName = lastName;
 	this.prize = prize;
+}
+
+
+public int getId() {
+	return id;
+}
+
+
+public void setId(int id) {
+	this.id = id;
 }
 
 
