@@ -5,18 +5,18 @@ import java.util.Collection;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bae.entity.Account;
 import com.bae.service.AccountService;
-import com.bae.service.AccountServiceImpl;
-
 
 @RestController
 @RequestMapping("/account")
@@ -25,30 +25,35 @@ public class AccountController {
 	@Autowired
 	private AccountService service;
 	
+	public AccountController () {
+		
+	}
+
 	@GetMapping("/all")
 	public Collection<Account> getAllAccounts() {
 		return service.getAllAccounts();
 	}
 
 	@GetMapping("/anAccount/{id}")
-	public Collection<Account> getanAccount(@PathParam("id") int id) {
-		return AccountServiceImpl.getAnAccount();
+	public Account getanAccount(@PathParam("id") long id) {
+		return service.getanAccount(id);
 	}
-//
-//	@DeleteMapping("/delete/{id}")
-//	public Collection<Account> deleteAccount(@PathParam("id") int id) {
-//		return AccountServiceImpl.deleteAccount();
-//	}
-//
-//	@PutMapping("updateAccount/{id}")
-//	public Collection<Account> updateAccount(@PathVariable("id") int id, String accountNumber) {
-//
-//		return AccountServiceImpl.updateAccount(id, accountNumber);
-//	}
-//
-//	@PostMapping("/create")
-//	public Collection<Account> createAccount() {
-//		return AccountServiceImpl.createAccount();
-//	}
+	
+	@PostMapping("/createAcc")
+	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+		Account NewAcc = service.createAccount(account);
+		return new ResponseEntity<>(NewAcc, HttpStatus.CREATED);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public String deleteAccount(Account account) {
+		return service.deleteAccount(account);
+	}
+
+	@PutMapping("updateAccount/{id}")
+public String updateAccount(Account account) {
+		return service.updateAccount(account);
+	
+	}
 
 }

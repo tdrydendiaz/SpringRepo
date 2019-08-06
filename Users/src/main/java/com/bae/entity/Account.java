@@ -29,9 +29,23 @@ public Account(String accountNumber, String firstName, String lastName, int priz
 	this.prize = prize;
 }
 
+public Account () {
+	
+}
+
 
 public long getId() {
 	return id;
+}
+
+
+public Account(long id, String accountNumber, String firstName, String lastName, int prize) {
+	super();
+	this.id = id;
+	this.accountNumber = accountNumber;
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.prize = prize;
 }
 
 

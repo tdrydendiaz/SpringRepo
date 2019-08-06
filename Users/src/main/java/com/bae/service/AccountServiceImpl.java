@@ -11,62 +11,56 @@ import com.bae.repository.AccountRepo;
 @Service
 public class AccountServiceImpl implements AccountService {
 
-	@Autowired
+	
 	private AccountRepo repo;
+	
+	public AccountServiceImpl() {
+		
+	}
+	
+	
+	@Autowired
+	public AccountServiceImpl(AccountRepo accountRepo) {
+		this.repo=accountRepo;
+	}
+	
 
+	@Override
 	public Collection<Account> getAllAccounts() {
 		return repo.findAll();
+		
+	}
+	
+	@Override
+	public Account getanAccount(long id) {
+		Account oneAcc = repo.findById(id).get();
+				return oneAcc;
+	}
+	
+
+	@Override
+	public Account createAccount(Account account) {
+		
+		return repo.save(account);
 	}
 
 	
-	public Account getanAccount(long id) {
-		return repo.findById(id);
+	@Override
+	public String updateAccount(Account account) {
+	repo.deleteById(account.getId());
+	repo.save(account);
+	return account.toString();
 	}
-//	public static Collection<Account> createAccount() {
-//		return null;
-//
-//	}
-//
-//	public static Collection<Account> deleteAccount() {
-//
-//		return null;
-//	}
-//
 
-//
-//	public static Collection<Account> updateAccount(int id, String accountNumber) {
-//
-//		return repo.updateAccount(id, accountNumber);
-//	}
+	@Override
+	public String deleteAccount(Account account) {
+		repo.delete(account);
+		return "Account deleted";
+	}
 
-//	@Override
-//	public String getAllAccounts() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String getanAccount(int id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String createAccount(String accountNumber) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String updateAccount(int id, String accountNumber) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public String deleteAccount(int id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//}
+
+	
+
+	
+
 }
