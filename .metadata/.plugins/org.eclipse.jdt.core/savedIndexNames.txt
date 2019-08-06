@@ -6,7 +6,6 @@ INDEX VERSION 1.131+C:\Users\Admin\Documents\workspace-sts-3.9.9.RELEASE\.metada
 1847837724.index
 1479648412.index
 1339015111.index
-3656258783.index
 2665312357.index
 1763646391.index
 4040194344.index
