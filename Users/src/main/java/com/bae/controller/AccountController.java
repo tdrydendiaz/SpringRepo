@@ -27,9 +27,6 @@ public class AccountController {
 	@Autowired
 	private AccountService service;
 	
-	private RestTemplate restTemplate;
-
-	
 	public AccountController () {
 		
 	}
