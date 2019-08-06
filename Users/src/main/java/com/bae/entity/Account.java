@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Account {
 
 @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-private int id;
+private long id;
 @Column (length = 30)
 private String accountNumber;
 @Column (length = 50)
@@ -30,7 +30,7 @@ public Account(String accountNumber, String firstName, String lastName, int priz
 }
 
 
-public int getId() {
+public long getId() {
 	return id;
 }
 
