@@ -11,5 +11,5 @@ public interface AccountService {
 	String updateAccount(Account account);
 	String deleteAccount(Account account);
 	
-	
 }
+

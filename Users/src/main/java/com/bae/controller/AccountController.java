@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.bae.entity.Account;
 import com.bae.service.AccountService;
@@ -24,6 +26,9 @@ public class AccountController {
 
 	@Autowired
 	private AccountService service;
+	
+	private RestTemplate restTemplate;
+
 	
 	public AccountController () {
 		
@@ -55,5 +60,12 @@ public String updateAccount(Account account) {
 		return service.updateAccount(account);
 	
 	}
-
+//	@GetMapping("/getMicro")
+//	public String getMicro() {
+//
+//		ResponseEntity<String> exchangeAccount = restTemplate.exchange("http://localhost:8081/getMicro",
+//				HttpMethod.GET, null, String.class);
+//		return exchangeAccount.getBody();
+//
+//	}
 }
