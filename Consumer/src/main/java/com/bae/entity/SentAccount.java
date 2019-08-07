@@ -1,28 +1,22 @@
 package com.bae.entity;
 
-//@Entity
 public class SentAccount {
 
-//	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 //	private long id;
-//	@Column (length = 30)
 	private String accountNumber;
-//	@Column (length = 50)
 	private String firstName;
-//	@Column (length = 50)
 	private String lastName;
 	private String prize;
 
-	public SentAccount(Account account) {
+	public SentAccount() {
 
-//		this.accountNumber = accountNumber;
-//		this.firstName = firstName;
-//		this.lastName = lastName;
-//		this.prize = prize;
-		this.accountNumber = account.getAccountNumber();
-		this.firstName = account.getFirstName();
-		this.lastName = account.getLastName();
-		this.prize = account.getPrize();
+	}
+
+	public SentAccount(String accountNumber, String firstName, String lastName, String prize) {
+		this.accountNumber = accountNumber;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.prize = prize;
 	}
 
 //	public long getId() {
