@@ -13,39 +13,49 @@ public class PrizeGenServiceImpl implements PrizeGenService {
 		case 'a': {
 			if (accountNumber.length() == 6) {
 				result = "You Won $0";
+				break;
 			}
 
 			if (accountNumber.length() == 8) {
 				result = "You Won $0";
+				break;
+				
 			}
 			if (accountNumber.length() == 10) {
 				result = "You Won $0";
+				break;
 			}
 		}
 
 		case 'b': {
 			if (accountNumber.length() == 6) {
 				result = "You Won $50";
+				break;
 			}
 
 			if (accountNumber.length() == 8) {
 				result = "You Won $500";
+				break;
 			}
 			if (accountNumber.length() == 10) {
 				result = "You Won $5000";
+				break;
 			}
 		}
 
 		case 'c': {
 			if (accountNumber.length() == 6) {
 				result = "You Won $100";
+				break;
 			}
 
 			if (accountNumber.length() == 8) {
 				result = "You Won $750";
+				break;
 			}
 			if (accountNumber.length() == 10) {
 				result = "You Won $10000";
+				break;
 			}
 		}
 			
