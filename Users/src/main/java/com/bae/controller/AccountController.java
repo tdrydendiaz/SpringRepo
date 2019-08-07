@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.bae.entity.Account;
+import com.bae.entity.SentAccount;
 import com.bae.service.AccountService;
 
 @RestController
@@ -26,9 +28,24 @@ public class AccountController {
 
 	@Autowired
 	private AccountService service;
-	
-	public AccountController () {
-		
+	private JmsTemplate jmsTemplate;
+
+	public AccountController() {
+
+	}
+
+	@Autowired
+	public AccountController(AccountService service, JmsTemplate jmsTemplate) {
+		this.service = service;
+		this.jmsTemplate = jmsTemplate;
+	}
+
+
+	@PostMapping
+	private Account sendToQueue(Account account) {
+		SentAccount sentAccount = new SentAccount(account);
+		jmsTemplate.convertAndSend("AccountQueue", sentAccount);
+		return account;
 	}
 
 	@GetMapping("/all")
@@ -40,11 +57,13 @@ public class AccountController {
 	public Account getanAccount(@PathParam("id") long id) {
 		return service.getanAccount(id);
 	}
-	
+
 	@PostMapping("/createAcc")
 	public ResponseEntity<Account> createAccount(@RequestBody Account account) {
 		Account NewAcc = service.createAccount(account);
+		sendToQueue(account);
 		return new ResponseEntity<>(NewAcc, HttpStatus.CREATED);
+		
 	}
 
 	@DeleteMapping("/delete/{id}")
@@ -53,9 +72,9 @@ public class AccountController {
 	}
 
 	@PutMapping("updateAccount/{id}")
-public String updateAccount(Account account) {
+	public String updateAccount(Account account) {
 		return service.updateAccount(account);
-	
+
 	}
 //	@GetMapping("/getMicro")
 //	public String getMicro() {
