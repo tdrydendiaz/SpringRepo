@@ -17,11 +17,10 @@ private String accountNumber;
 private String firstName;
 @Column (length = 50)
 private String lastName;
-@Column (length = 10)
-private int prize;
+private String prize;
 
 
-public Account(String accountNumber, String firstName, String lastName, int prize) {
+public Account(String accountNumber, String firstName, String lastName, String prize) {
 	super();
 	this.accountNumber = accountNumber;
 	this.firstName = firstName;
@@ -39,7 +38,7 @@ public long getId() {
 }
 
 
-public Account(long id, String accountNumber, String firstName, String lastName, int prize) {
+public Account(long id, String accountNumber, String firstName, String lastName, String prize) {
 	super();
 	this.id = id;
 	this.accountNumber = accountNumber;
@@ -84,12 +83,12 @@ public void setLastName(String lastName) {
 }
 
 
-public int getPrize() {
+public String getPrize() {
 	return prize;
 }
 
 
-public void setPrize(int prize) {
+public void setPrize(String prize) {
 	this.prize = prize;
 }
 

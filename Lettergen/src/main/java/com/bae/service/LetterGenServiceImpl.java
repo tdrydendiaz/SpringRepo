@@ -19,7 +19,7 @@ public class LetterGenServiceImpl implements LetterGenService {
 			return "c";
 		}
 
-		return "noPrize";
+		return "";
 	}
 
 }

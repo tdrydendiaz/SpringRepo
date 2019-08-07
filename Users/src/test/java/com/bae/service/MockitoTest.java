@@ -24,8 +24,8 @@ public class MockitoTest {
 	@Mock
 	AccountRepo repo;
 
-	private static final Account MOCK_ACC_1 = new Account("AC123456", "Tania", "Diaz", 30);
-	private static final Account MOCK_ACC_2 = new Account("AD123456", "Jen", "Smith", 60);
+	private static final Account MOCK_ACC_1 = new Account("AC123456", "Tania", "Diaz", "30");
+	private static final Account MOCK_ACC_2 = new Account("AD123456", "Jen", "Smith", "60");
 	private static final String MOCK_DELETE_RESPONSE = "Account Successfully deleted";
 
 	@Test

@@ -15,44 +15,58 @@ public class AccountServiceImpl implements AccountService {
 	
 	private AccountRepo repo;
 	
-	public AccountServiceImpl() {
-		
-	}
-	
-	
-	@Autowired
-	public AccountServiceImpl(AccountRepo accountRepo) {
-		this.repo=accountRepo;
-	}
-	@Autowired
 	private RestTemplate rest;
+
+	@Autowired
+	public AccountServiceImpl(AccountRepo accountRepo, RestTemplate rest) {
+		this.repo = accountRepo;
+		this.rest = rest;
+	}
+	
+	public AccountServiceImpl() {
+
+	}
 
 
 	@Override
 	public Collection<Account> getAllAccounts() {
 		return repo.findAll();
-		
+
 	}
-	
+
 	@Override
 	public Account getanAccount(long id) {
 		Account oneAcc = repo.findById(id).get();
-				return oneAcc;
+		return oneAcc;
 	}
-	
 
 	@Override
 	public Account createAccount(Account account) {
+
+		String prefix = rest.getForObject("http://localhost:8083/Letter", String.class);
 		
+		String suffix = rest.getForObject("http://localhost:8082/getNum6", String.class);
+
+		String accountNumber = prefix + suffix;
+		
+		account.setAccountNumber(accountNumber);
+		
+		String prize = rest.getForObject("http://localhost:8084/"+accountNumber, String.class);
+		
+		account.setPrize(prize);
+		
+		System.out.println(prize);
+		System.out.println(account);
+		System.out.println(account.getPrize());
+
 		return repo.save(account);
 	}
 
-	
 	@Override
 	public String updateAccount(Account account) {
-	repo.deleteById(account.getId());
-	repo.save(account);
-	return account.toString();
+		repo.deleteById(account.getId());
+		repo.save(account);
+		return account.toString();
 	}
 
 	@Override
@@ -60,10 +74,5 @@ public class AccountServiceImpl implements AccountService {
 		repo.delete(account);
 		return "Account deleted";
 	}
-
-
-	
-
-	
 
 }
