@@ -33,12 +33,14 @@ public class AccountServiceImpl implements AccountService {
 		return repo.findAll();
 
 	}
+	
 
 	@Override
-	public Account getanAccount(long id) {
+	public Account getanAccount(Long id) {
 		Account oneAcc = repo.findById(id).get();
 		return oneAcc;
 	}
+	
 
 	@Override
 	public Account createAccount(Account account) {

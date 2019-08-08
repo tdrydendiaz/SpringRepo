@@ -9,8 +9,9 @@ import javax.persistence.Id;
 @Entity
 public class Account {
 
-@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
-private long id;
+@Id 
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private Long id;
 @Column (length = 30)
 private String accountNumber;
 @Column (length = 50)
@@ -33,12 +34,12 @@ public Account () {
 }
 
 
-public long getId() {
+public Long getId() {
 	return id;
 }
 
 
-public Account(long id, String accountNumber, String firstName, String lastName, String prize) {
+public Account(Long id, String accountNumber, String firstName, String lastName, String prize) {
 	super();
 	this.id = id;
 	this.accountNumber = accountNumber;
@@ -48,7 +49,7 @@ public Account(long id, String accountNumber, String firstName, String lastName,
 }
 
 
-public void setId(int id) {
+public void setId(Long id) {
 	this.id = id;
 }
 
